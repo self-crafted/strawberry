@@ -1,6 +1,8 @@
 package com.github.selfcrafted.strawberry;
 
 import com.github.selfcrafted.strawberry.commands.Commands;
+import com.github.selfcrafted.strawberry.config.ServerConfig;
+import com.github.selfcrafted.strawberry.config.ServerConfigImpl;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.MinecraftServer;
@@ -19,16 +21,16 @@ public class Server {
     public static final String VERSION = "&version";
     public static final String MINESTOM_VERSION = "&minestomVersion";
     private static final String START_SCRIPT_FILENAME = "start.sh";
+    public static final ServerConfig CONFIG = ServerConfigImpl.read();
 
     public static void main(String[] args) throws IOException {
-        Settings.read();
-        if (Settings.getTps() != null)
-            System.setProperty("minestom.tps", Settings.getTps());
-        if (Settings.getChunkViewDistance() != null)
-            System.setProperty("minestom.chunk-view-distance", Settings.getChunkViewDistance());
-        if (Settings.getEntityViewDistance() != null)
-            System.setProperty("minestom.entity-view-distance", Settings.getEntityViewDistance());
-        if (Settings.isTerminalDisabled())
+        if (CONFIG.getTps() != null)
+            System.setProperty("minestom.tps", CONFIG.getTps());
+        if (CONFIG.getChunkViewDistance() != null)
+            System.setProperty("minestom.chunk-view-distance", CONFIG.getChunkViewDistance());
+        if (CONFIG.getEntityViewDistance() != null)
+            System.setProperty("minestom.entity-view-distance", CONFIG.getEntityViewDistance());
+        if (CONFIG.isTerminalDisabled())
             System.setProperty("minestom.terminal.disabled", "");
 
         MinecraftServer.LOGGER.info("====== VERSIONS ======");
@@ -64,7 +66,7 @@ public class Server {
         MinecraftServer.getCommandManager().register(Commands.RESTART);
         MinecraftServer.getExtensionManager().setExtensionDataRoot(Path.of("config"));
 
-        switch (Settings.getMode()) {
+        switch (CONFIG.getMode()) {
             case OFFLINE:
                 break;
             case ONLINE:
@@ -74,14 +76,14 @@ public class Server {
                 BungeeCordProxy.enable();
                 break;
             case VELOCITY:
-                if (!Settings.hasVelocitySecret())
+                if (!CONFIG.hasVelocitySecret())
                     throw new IllegalArgumentException("The velocity secret is mandatory.");
-                VelocityProxy.enable(Settings.getVelocitySecret());
+                VelocityProxy.enable(CONFIG.getVelocitySecret());
         }
 
-        MinecraftServer.LOGGER.info("Running in " + Settings.getMode() + " mode.");
-        MinecraftServer.LOGGER.info("Listening on " + Settings.getServerIp() + ":" + Settings.getServerPort());
+        MinecraftServer.LOGGER.info("Running in " + CONFIG.getMode() + " mode.");
+        MinecraftServer.LOGGER.info("Listening on " + CONFIG.getServerIp() + ":" + CONFIG.getServerPort());
 
-        server.start(Settings.getServerIp(), Settings.getServerPort());
+        server.start(CONFIG.getServerIp(), CONFIG.getServerPort());
     }
 }

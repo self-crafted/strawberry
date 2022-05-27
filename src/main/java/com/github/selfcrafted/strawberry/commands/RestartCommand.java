@@ -1,6 +1,6 @@
 package com.github.selfcrafted.strawberry.commands;
 
-import com.github.selfcrafted.strawberry.Settings;
+import com.github.selfcrafted.strawberry.Server;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.ConsoleSender;
 import net.minestom.server.command.ServerSender;
@@ -13,7 +13,7 @@ public class RestartCommand extends Command {
         super("restart");
         setCondition(((sender, commandString) -> (sender instanceof ServerSender)
                 || (sender instanceof ConsoleSender)
-                || Settings.isAllowPlayerRestart()));
+                || Server.CONFIG.isAllowPlayerRestart()));
         addSyntax((sender, context) -> {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
