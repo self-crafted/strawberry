@@ -1,5 +1,6 @@
 package com.github.selfcrafted.strawberry.instances;
 
+import net.minestom.server.MinecraftServer;
 import net.minestom.server.utils.NamespaceID;
 import net.minestom.server.world.DimensionType;
 
@@ -38,4 +39,12 @@ public class DimensionTypes {
             .infiniburn(NamespaceID.from("minecraft:infiniburn_nether"))
             .coordinateScale(8)
             .build();
+
+
+    public static void register() {
+        // Register dimension types
+        var dimensionTypeManager = MinecraftServer.getDimensionTypeManager();
+        dimensionTypeManager.addDimension(OVERWORLD);
+        dimensionTypeManager.addDimension(NETHER);
+    }
 }

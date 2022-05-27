@@ -30,15 +30,6 @@ public class Server {
     public static final ServerConfig CONFIG = ServerConfigImpl.read();
 
     public static void main(String[] args) throws IOException {
-        if (CONFIG.getTps() != null)
-            System.setProperty("minestom.tps", CONFIG.getTps());
-        if (CONFIG.getChunkViewDistance() != null)
-            System.setProperty("minestom.chunk-view-distance", CONFIG.getChunkViewDistance());
-        if (CONFIG.getEntityViewDistance() != null)
-            System.setProperty("minestom.entity-view-distance", CONFIG.getEntityViewDistance());
-        if (CONFIG.isTerminalDisabled())
-            System.setProperty("minestom.terminal.disabled", "");
-
         MinecraftServer.LOGGER.info(" _____ _                      _                          ");
         MinecraftServer.LOGGER.info("/  ___| |                    | |                         ");
         MinecraftServer.LOGGER.info("\\ `--.| |_ _ __ __ ___      _| |__   ___ _ __ _ __ _   _ ");
@@ -55,8 +46,7 @@ public class Server {
         if (args.length > 0 && args[0].equalsIgnoreCase("-v")) System.exit(0);
 
         File startScriptFile = new File(START_SCRIPT_FILENAME);
-        if (startScriptFile.isDirectory()) MinecraftServer.LOGGER.warn("Can't create startup script!");
-        if (!startScriptFile.isFile()) {
+        if (!startScriptFile.exists()) {
             MinecraftServer.LOGGER.info("Create startup script.");
             Files.copy(
                     Objects.requireNonNull(Server.class.getClassLoader().getResourceAsStream(START_SCRIPT_FILENAME)),
@@ -66,32 +56,18 @@ public class Server {
             System.exit(0);
         }
 
-        // Actually start server
+        if (CONFIG.getTps() != null)
+            System.setProperty("minestom.tps", CONFIG.getTps());
+        if (CONFIG.getChunkViewDistance() != null)
+            System.setProperty("minestom.chunk-view-distance", CONFIG.getChunkViewDistance());
+        if (CONFIG.getEntityViewDistance() != null)
+            System.setProperty("minestom.entity-view-distance", CONFIG.getEntityViewDistance());
+        if (CONFIG.isTerminalDisabled())
+            System.setProperty("minestom.terminal.disabled", "");
+
+        // Initialise server
         MinecraftServer server = MinecraftServer.init();
 
-        // Register dimension types
-        var dimensionTypeManager = MinecraftServer.getDimensionTypeManager();
-        dimensionTypeManager.addDimension(DimensionTypes.OVERWORLD);
-        dimensionTypeManager.addDimension(DimensionTypes.NETHER);
-        // Register biomes
-        var biomeManager = MinecraftServer.getBiomeManager();
-        biomeManager.addBiome(Biomes.DESERT);
-        biomeManager.addBiome(Biomes.WASTELANDS);
-
-        MinecraftServer.getGlobalEventHandler().addListener(PlayerLoginEvent.class, event -> {
-            // TODO: 27.05.22 get players login point from world data
-            event.setSpawningInstance(Instances.OVERWORLD);
-        });
-
-        MinecraftServer.getGlobalEventHandler().addListener(PlayerSpawnEvent.class, event -> {
-            var player = event.getPlayer();
-            // TODO: 27.05.22 read players state from world data
-            player.setGameMode(GameMode.CREATIVE);
-            player.setRespawnPoint(new Pos(0, -63, 0));
-        });
-
-        MinecraftServer.getCommandManager().register(Commands.SHUTDOWN);
-        MinecraftServer.getCommandManager().register(Commands.RESTART);
         MinecraftServer.getExtensionManager().setExtensionDataRoot(Path.of("config"));
 
         switch (CONFIG.getMode()) {
@@ -109,9 +85,29 @@ public class Server {
                 VelocityProxy.enable(CONFIG.getVelocitySecret());
         }
 
+        // Register everything that needs to be registered
+        Biomes.register();
+        DimensionTypes.register();
+        Instances.register();
+        Commands.register();
+
+        // Add server-wide events
+        var globalEventHandler = MinecraftServer.getGlobalEventHandler();
+        globalEventHandler.addListener(PlayerLoginEvent.class, event -> {
+            // TODO: 27.05.22 get players login point from world data
+            event.setSpawningInstance(Instances.OVERWORLD);
+        });
+
+        globalEventHandler.addListener(PlayerSpawnEvent.class, event -> {
+            var player = event.getPlayer();
+            // TODO: 27.05.22 read players state from world data
+            player.setGameMode(GameMode.CREATIVE);
+            player.setRespawnPoint(new Pos(0, -63, 0));
+        });
+
+        // Actually start server
         MinecraftServer.LOGGER.info("Running in " + CONFIG.getMode() + " mode.");
         MinecraftServer.LOGGER.info("Listening on " + CONFIG.getServerIp() + ":" + CONFIG.getServerPort());
-
         server.start(CONFIG.getServerIp(), CONFIG.getServerPort());
     }
 }
