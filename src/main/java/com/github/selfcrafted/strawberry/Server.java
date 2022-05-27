@@ -39,12 +39,18 @@ public class Server {
         if (CONFIG.isTerminalDisabled())
             System.setProperty("minestom.terminal.disabled", "");
 
-        MinecraftServer.LOGGER.info("====== VERSIONS ======");
-        MinecraftServer.LOGGER.info("Java: " + Runtime.version());
+        MinecraftServer.LOGGER.info(" _____ _                      _                          ");
+        MinecraftServer.LOGGER.info("/  ___| |                    | |                         ");
+        MinecraftServer.LOGGER.info("\\ `--.| |_ _ __ __ ___      _| |__   ___ _ __ _ __ _   _ ");
+        MinecraftServer.LOGGER.info(" `--. \\ __| '__/ _` \\ \\ /\\ / / '_ \\ / _ \\ '__| '__| | | |");
+        MinecraftServer.LOGGER.info("/\\__/ / |_| | | (_| |\\ V  V /| |_) |  __/ |  | |  | |_| |");
+        MinecraftServer.LOGGER.info("\\____/ \\__|_|  \\__,_| \\_/\\_/ |_.__/ \\___|_|  |_|   \\__, |");
+        MinecraftServer.LOGGER.info("                                                    __/ |");
+        MinecraftServer.LOGGER.info("                                                   |___/ ");
         MinecraftServer.LOGGER.info("&Name: " + VERSION);
+        MinecraftServer.LOGGER.info("Protocol: %d (%s)".formatted(MinecraftServer.PROTOCOL_VERSION, MinecraftServer.VERSION_NAME));
         MinecraftServer.LOGGER.info("Minestom: " + MINESTOM_VERSION);
-        MinecraftServer.LOGGER.info("Supported protocol: %d (%s)".formatted(MinecraftServer.PROTOCOL_VERSION, MinecraftServer.VERSION_NAME));
-        MinecraftServer.LOGGER.info("======================");
+        MinecraftServer.LOGGER.info("Java: " + Runtime.version());
 
         if (args.length > 0 && args[0].equalsIgnoreCase("-v")) System.exit(0);
 
