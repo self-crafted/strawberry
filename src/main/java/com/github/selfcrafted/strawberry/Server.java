@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Server {
@@ -43,7 +44,7 @@ public class Server {
         MinecraftServer.LOGGER.info("Minestom: " + MINESTOM_VERSION);
         MinecraftServer.LOGGER.info("Java: " + Runtime.version());
 
-        if (args.length > 0 && args[0].equalsIgnoreCase("-v")) System.exit(0);
+        if (Arrays.asList(args).contains("--version")) System.exit(0);
 
         File startScriptFile = new File(START_SCRIPT_FILENAME);
         if (!startScriptFile.exists()) {
