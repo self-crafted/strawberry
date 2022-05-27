@@ -1,12 +1,18 @@
 package com.github.selfcrafted.strawberry;
 
+import com.github.selfcrafted.strawberry.biomes.Biomes;
 import com.github.selfcrafted.strawberry.commands.Commands;
 import com.github.selfcrafted.strawberry.config.ServerConfig;
 import com.github.selfcrafted.strawberry.config.ServerConfigImpl;
+import com.github.selfcrafted.strawberry.instances.DimensionTypes;
+import com.github.selfcrafted.strawberry.instances.Instances;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.MinecraftServer;
+import net.minestom.server.coordinate.Pos;
+import net.minestom.server.entity.GameMode;
 import net.minestom.server.event.player.PlayerLoginEvent;
+import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.bungee.BungeeCordProxy;
 import net.minestom.server.extras.velocity.VelocityProxy;
@@ -57,9 +63,25 @@ public class Server {
         // Actually start server
         MinecraftServer server = MinecraftServer.init();
 
+        // Register dimension types
+        var dimensionTypeManager = MinecraftServer.getDimensionTypeManager();
+        dimensionTypeManager.addDimension(DimensionTypes.OVERWORLD);
+        dimensionTypeManager.addDimension(DimensionTypes.NETHER);
+        // Register biomes
+        var biomeManager = MinecraftServer.getBiomeManager();
+        biomeManager.addBiome(Biomes.DESERT);
+        biomeManager.addBiome(Biomes.WASTELANDS);
+
         MinecraftServer.getGlobalEventHandler().addListener(PlayerLoginEvent.class, event -> {
-            if (MinecraftServer.getInstanceManager().getInstances().isEmpty())
-                event.getPlayer().kick(Component.text("There is no instance available!", NamedTextColor.RED));
+            // TODO: 27.05.22 get players login point from world data
+            event.setSpawningInstance(Instances.OVERWORLD);
+        });
+
+        MinecraftServer.getGlobalEventHandler().addListener(PlayerSpawnEvent.class, event -> {
+            var player = event.getPlayer();
+            // TODO: 27.05.22 read players state from world data
+            player.setGameMode(GameMode.CREATIVE);
+            player.setRespawnPoint(new Pos(0, -63, 0));
         });
 
         MinecraftServer.getCommandManager().register(Commands.SHUTDOWN);
