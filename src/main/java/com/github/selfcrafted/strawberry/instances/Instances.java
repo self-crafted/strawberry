@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public class Instances {
     public static final InstanceContainer OVERWORLD = new OverWorld(
-            UUID.fromString("overworld"),
+            UUID.randomUUID(),
             new AnvilLoader(Path.of("instances", "overworld")));
     public static final InstanceContainer NETHER = new Nether(
-            UUID.fromString("nether"),
+            UUID.randomUUID(),
             new AnvilLoader(Path.of("instances", "nether")));
 }
