@@ -1,7 +1,7 @@
 # strawberry
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-[![GitHub](https://img.shields.io/github/license/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/self-crafted/network-etcd?style=flat-square&color=b2204c)](LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/network/members)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/releases/latest)
