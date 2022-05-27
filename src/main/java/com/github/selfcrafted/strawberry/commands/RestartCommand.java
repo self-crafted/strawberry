@@ -1,6 +1,6 @@
-package com.github.klainstom.microstom.commands;
+package com.github.selfcrafted.strawberry.commands;
 
-import com.github.klainstom.microstom.Settings;
+import com.github.selfcrafted.strawberry.Settings;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.ConsoleSender;
 import net.minestom.server.command.ServerSender;

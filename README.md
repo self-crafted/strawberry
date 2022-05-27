@@ -1,11 +1,11 @@
-# microstom
+# strawberry
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-[![GitHub](https://img.shields.io/github/license/KlainStom/microstom?style=flat-square)](https://github.com/KlainStom/microstom/blob/master/LICENSE)
-[![GitHub Repo stars](https://img.shields.io/github/stars/KlainStom/microstom?style=flat-square)](https://github.com/KlainStom/microstom/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/KlainStom/microstom?style=flat-square)](https://github.com/KlainStom/microstom/network/members)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/KlainStom/microstom?style=flat-square)](https://github.com/KlainStom/microstom/releases/latest)
-[![GitHub all releases](https://img.shields.io/github/downloads/KlainStom/microstom/total?style=flat-square)](https://github.com/KlainStom/microstom/releases)
+[![GitHub](https://img.shields.io/github/license/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/blob/master/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/network/members)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/self-crafted/strawberry?style=flat-square)](https://github.com/self-crafted/strawberry/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/self-crafted/strawberry/total?style=flat-square)](https://github.com/self-crafted/strawberry/releases)
 
 Microstom is a minimal minecraft server with [Minestom](https://github.com/Minestom/Minestom) as its core.
 
@@ -23,9 +23,9 @@ Every piece of content has to be added as extension, (almost) nothing is there b
 - [License](#license)
 
 ## Install
-You could either just download a [release](https://github.com/KlainStom/microstom/releases) or you compile the server yourself using the following commands under Linux
+You could either just download a [release](https://github.com/self-crafted/strawberry/releases) or you compile the server yourself using the following commands under Linux
 ```shell
-git clone https://github.com/KlainStom/microstom.git
+git clone https://github.com/self-crafted/strawberry.git
 cd microstom
 ./gradlew build
 ```

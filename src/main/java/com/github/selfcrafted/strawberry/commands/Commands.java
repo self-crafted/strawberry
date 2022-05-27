@@ -1,4 +1,4 @@
-package com.github.klainstom.microstom.commands;
+package com.github.selfcrafted.strawberry.commands;
 
 import net.minestom.server.command.builder.Command;
 

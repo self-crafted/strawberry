@@ -4,9 +4,9 @@ plugins {
     java
 }
 
-var displayName = "Microstom"
+var displayName = "Strawberry"
 
-group = "com.github.klainstom"
+group = "com.github.selfcrafted"
 version = "6.0.0-SNAPSHOT"
 
 dependencies {
@@ -33,7 +33,7 @@ tasks {
 
     shadowJar {
         manifest {
-            attributes("Main-Class" to "com.github.klainstom.microstom.Server")
+            attributes("Main-Class" to "com.github.selfcrafted.strawberry.Server")
         }
         archiveBaseName.set(displayName)
         archiveClassifier.set("")
