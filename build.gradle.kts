@@ -23,12 +23,14 @@ tasks {
     }
 
     processResources {
-        expand(
-            mapOf(
-                "Name" to displayName,
-                "version" to version
+        filesNotMatching("**/*.png") {
+            expand(
+                mapOf(
+                    "Name" to displayName,
+                    "version" to version
+                )
             )
-        )
+        }
     }
 
     shadowJar {
