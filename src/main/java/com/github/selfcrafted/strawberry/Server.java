@@ -5,6 +5,7 @@ import com.github.selfcrafted.strawberry.commands.Commands;
 import com.github.selfcrafted.strawberry.config.ServerConfig;
 import com.github.selfcrafted.strawberry.config.ServerConfigImpl;
 import com.github.selfcrafted.strawberry.events.ServerEvents;
+import com.github.selfcrafted.strawberry.extra.startscript.StartScript;
 import com.github.selfcrafted.strawberry.instances.DimensionTypes;
 import com.github.selfcrafted.strawberry.instances.Instances;
 import com.github.selfcrafted.strawberry.serverlist.ListPing;
@@ -23,10 +24,9 @@ import java.util.Objects;
 public class Server {
     public static final String VERSION = "&version";
     public static final String MINESTOM_VERSION = "&minestomVersion";
-    private static final String START_SCRIPT_FILENAME = "start.sh";
     public static final ServerConfig CONFIG = ServerConfigImpl.read();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         MinecraftServer.LOGGER.info(" _____ _                      _                          ");
         MinecraftServer.LOGGER.info("/  ___| |                    | |                         ");
         MinecraftServer.LOGGER.info("\\ `--.| |_ _ __ __ ___      _| |__   ___ _ __ _ __ _   _ ");
@@ -41,17 +41,7 @@ public class Server {
         MinecraftServer.LOGGER.info("Java: " + Runtime.version());
 
         if (Arrays.asList(args).contains("--version")) System.exit(0);
-
-        File startScriptFile = new File(START_SCRIPT_FILENAME);
-        if (!startScriptFile.exists()) {
-            MinecraftServer.LOGGER.info("Create startup script.");
-            Files.copy(
-                    Objects.requireNonNull(Server.class.getClassLoader().getResourceAsStream(START_SCRIPT_FILENAME)),
-                    startScriptFile.toPath());
-            Runtime.getRuntime().exec("chmod u+x start.sh");
-            MinecraftServer.LOGGER.info("Use './start.sh' to start the server.");
-            System.exit(0);
-        }
+        StartScript.generate();
 
         if (CONFIG.getTps() != null)
             System.setProperty("minestom.tps", CONFIG.getTps());
