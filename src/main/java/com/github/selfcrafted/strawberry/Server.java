@@ -69,7 +69,7 @@ public class Server {
         ListPing.setup();
 
         switch (CONFIG.getMode()) {
-            case OFFLINE -> {}
+            case OFFLINE -> MinecraftServer.LOGGER.warn("Running in offline mode allows anyone and everyone to join!");
             case ONLINE -> MojangAuth.init();
             case BUNGEECORD -> BungeeCordProxy.enable();
             case VELOCITY -> {
