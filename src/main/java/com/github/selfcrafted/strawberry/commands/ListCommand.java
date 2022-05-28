@@ -3,13 +3,14 @@ package com.github.selfcrafted.strawberry.commands;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.Command;
+import net.minestom.server.entity.Player;
 
 public class ListCommand extends Command {
     ListCommand() {
         super("list");
         addSyntax((sender, context) -> {
             var players = MinecraftServer.getConnectionManager().getOnlinePlayers();
-            var playersNames = players.stream().collect(StringBuilder::new, StringBuilder::append,
+            var playersNames = players.stream().map(Player::getUsername).collect(StringBuilder::new, StringBuilder::append,
                     (a, b) -> a.append(",").append(b)).toString();
             var playerCount = players.size();
             // TODO: 28.05.22 make maxplayers configurable
