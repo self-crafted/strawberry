@@ -4,6 +4,7 @@ import com.github.selfcrafted.strawberry.biomes.Biomes;
 import com.github.selfcrafted.strawberry.commands.Commands;
 import com.github.selfcrafted.strawberry.config.ServerConfig;
 import com.github.selfcrafted.strawberry.config.ServerConfigImpl;
+import com.github.selfcrafted.strawberry.events.ServerEvents;
 import com.github.selfcrafted.strawberry.instances.DimensionTypes;
 import com.github.selfcrafted.strawberry.instances.Instances;
 import com.github.selfcrafted.strawberry.serverlist.ListPing;
@@ -96,20 +97,7 @@ public class Server {
         DimensionTypes.register();
         Instances.register();
         Commands.register();
-
-        // Add server-wide events
-        var globalEventHandler = MinecraftServer.getGlobalEventHandler();
-        globalEventHandler.addListener(PlayerLoginEvent.class, event -> {
-            // TODO: 27.05.22 get players login point from world data
-            event.setSpawningInstance(Instances.OVERWORLD);
-        });
-
-        globalEventHandler.addListener(PlayerSpawnEvent.class, event -> {
-            var player = event.getPlayer();
-            // TODO: 27.05.22 read players state from world data
-            player.setGameMode(GameMode.CREATIVE);
-            player.setRespawnPoint(new Pos(0, -63, 0));
-        });
+        ServerEvents.register(MinecraftServer.getGlobalEventHandler());
 
         // Actually start server
         MinecraftServer.LOGGER.info("Running in " + CONFIG.getMode() + " mode.");
