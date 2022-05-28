@@ -9,7 +9,7 @@ import net.minestom.server.command.builder.Command;
 import java.io.IOException;
 
 public class RestartCommand extends Command {
-    public RestartCommand() {
+    RestartCommand() {
         super("restart");
         setCondition(((sender, commandString) -> (sender instanceof ServerSender)
                 || (sender instanceof ConsoleSender)
