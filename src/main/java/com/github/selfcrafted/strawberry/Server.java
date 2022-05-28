@@ -69,18 +69,14 @@ public class Server {
         ListPing.setup();
 
         switch (CONFIG.getMode()) {
-            case OFFLINE:
-                break;
-            case ONLINE:
-                MojangAuth.init();
-                break;
-            case BUNGEECORD:
-                BungeeCordProxy.enable();
-                break;
-            case VELOCITY:
+            case OFFLINE -> {}
+            case ONLINE -> MojangAuth.init();
+            case BUNGEECORD -> BungeeCordProxy.enable();
+            case VELOCITY -> {
                 if (!CONFIG.hasVelocitySecret())
                     throw new IllegalArgumentException("The velocity secret is mandatory.");
                 VelocityProxy.enable(CONFIG.getVelocitySecret());
+            }
         }
 
         // Register everything that needs to be registered
