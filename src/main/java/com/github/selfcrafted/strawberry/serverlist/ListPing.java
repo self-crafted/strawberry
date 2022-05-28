@@ -25,7 +25,6 @@ public class ListPing {
             var os = new ByteArrayOutputStream();
             ImageIO.write(bgTileSprite, "png", os);
             var base64 = Base64.getEncoder().encodeToString(os.toByteArray());
-            MinecraftServer.LOGGER.info(base64);
             RESPONSE_DATA.setFavicon("data:image/png;base64," + base64);
         } catch (IOException e) {
             throw new RuntimeException(e);
