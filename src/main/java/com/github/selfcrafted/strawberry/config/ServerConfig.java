@@ -16,4 +16,6 @@ public interface ServerConfig {
     String getChunkViewDistance();
     String getEntityViewDistance();
     boolean isTerminalDisabled();
+
+    int getMaxPlayers();
 }

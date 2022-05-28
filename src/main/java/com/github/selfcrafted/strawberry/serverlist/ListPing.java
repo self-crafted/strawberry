@@ -1,5 +1,6 @@
 package com.github.selfcrafted.strawberry.serverlist;
 
+import com.github.selfcrafted.strawberry.Server;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.MinecraftServer;
@@ -33,7 +34,6 @@ public class ListPing {
     }
 
     public static void setup() {
-        // TODO: 28.05.22 make max players configurable
         var eventHandler = MinecraftServer.getGlobalEventHandler();
         eventHandler.addListener(ServerListPingEvent.class, event -> {
             event.setResponseData(RESPONSE_DATA);
@@ -41,13 +41,15 @@ public class ListPing {
         });
         eventHandler.addListener(PlayerLoginEvent.class, event -> {
             var playerCount = MinecraftServer.getConnectionManager().getOnlinePlayers().size();
+            var maxPlayers = Server.CONFIG.getMaxPlayers()<=0 ? playerCount+1 : Server.CONFIG.getMaxPlayers();
             RESPONSE_DATA.setOnline(playerCount);
-            RESPONSE_DATA.setMaxPlayer(playerCount+1);
+            RESPONSE_DATA.setMaxPlayer(maxPlayers);
         });
         eventHandler.addListener(PlayerDisconnectEvent.class, event -> {
             var playerCount = MinecraftServer.getConnectionManager().getOnlinePlayers().size();
+            var maxPlayers = Server.CONFIG.getMaxPlayers()<=0 ? playerCount+1 : Server.CONFIG.getMaxPlayers();
             RESPONSE_DATA.setOnline(playerCount);
-            RESPONSE_DATA.setMaxPlayer(playerCount+1);
+            RESPONSE_DATA.setMaxPlayer(maxPlayers);
         });
     }
 }

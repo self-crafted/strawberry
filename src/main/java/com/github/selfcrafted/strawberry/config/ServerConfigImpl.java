@@ -47,6 +47,8 @@ public class ServerConfigImpl implements ServerConfig {
     private final String ENTITY_VIEW_DISTANCE;
     private final boolean TERMINAL_DISABLED;
 
+    private final int MAX_PLAYERS;
+
     private ServerConfigImpl() {
         this.SERVER_IP = "localhost";
         this.SERVER_PORT = 25565;
@@ -61,6 +63,8 @@ public class ServerConfigImpl implements ServerConfig {
         this.CHUNK_VIEW_DISTANCE = null;
         this.ENTITY_VIEW_DISTANCE = null;
         this.TERMINAL_DISABLED = false;
+
+        this.MAX_PLAYERS = 20;
     }
 
     @Override
@@ -101,4 +105,7 @@ public class ServerConfigImpl implements ServerConfig {
     public String getEntityViewDistance() { return ENTITY_VIEW_DISTANCE; }
     @Override
     public boolean isTerminalDisabled() { return TERMINAL_DISABLED; }
+
+    @Override
+    public int getMaxPlayers() { return MAX_PLAYERS; }
 }
