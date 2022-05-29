@@ -8,6 +8,7 @@ import com.github.selfcrafted.strawberry.events.ServerEvents;
 import com.github.selfcrafted.strawberry.extra.startscript.StartScript;
 import com.github.selfcrafted.strawberry.instances.DimensionTypes;
 import com.github.selfcrafted.strawberry.instances.Instances;
+import com.github.selfcrafted.strawberry.receipe.Recipes;
 import com.github.selfcrafted.strawberry.extra.serverlist.ListPing;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.MinecraftServer;
@@ -15,12 +16,8 @@ import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.bungee.BungeeCordProxy;
 import net.minestom.server.extras.velocity.VelocityProxy;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Server {
     public static final String VERSION = "&version";
@@ -75,6 +72,7 @@ public class Server {
         DimensionTypes.register();
         Instances.register();
         Commands.register();
+        Recipes.register(MinecraftServer.getRecipeManager());
         ServerEvents.register(MinecraftServer.getGlobalEventHandler());
         // Kick all players on shutdown
         MinecraftServer.getSchedulerManager().buildShutdownTask(() ->
