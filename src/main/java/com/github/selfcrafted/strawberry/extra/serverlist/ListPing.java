@@ -1,4 +1,4 @@
-package com.github.selfcrafted.strawberry.serverlist;
+package com.github.selfcrafted.strawberry.extra.serverlist;
 
 import com.github.selfcrafted.strawberry.Server;
 import net.kyori.adventure.text.Component;

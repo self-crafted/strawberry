@@ -8,7 +8,7 @@ import com.github.selfcrafted.strawberry.events.ServerEvents;
 import com.github.selfcrafted.strawberry.extra.startscript.StartScript;
 import com.github.selfcrafted.strawberry.instances.DimensionTypes;
 import com.github.selfcrafted.strawberry.instances.Instances;
-import com.github.selfcrafted.strawberry.serverlist.ListPing;
+import com.github.selfcrafted.strawberry.extra.serverlist.ListPing;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.extras.MojangAuth;
