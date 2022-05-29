@@ -11,6 +11,8 @@ import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.PlayerDisconnectEvent;
 import net.minestom.server.event.player.PlayerLoginEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
+import net.minestom.server.item.ItemStack;
+import net.minestom.server.item.Material;
 
 public class ServerEvents {
     public static void register(GlobalEventHandler eventHandler) {
@@ -24,6 +26,7 @@ public class ServerEvents {
 
             // TODO: 27.05.22 get players login point from world data
             event.setSpawningInstance(Instances.OVERWORLD);
+            player.setRespawnPoint(new Pos(0, 100, 0));
         });
 
         eventHandler.addListener(PlayerDisconnectEvent.class, event -> {
@@ -37,8 +40,8 @@ public class ServerEvents {
         eventHandler.addListener(PlayerSpawnEvent.class, event -> {
             var player = event.getPlayer();
             // TODO: 27.05.22 read players state from world data
-            player.setGameMode(GameMode.CREATIVE);
-            player.setRespawnPoint(new Pos(0, -63, 0));
+            player.setGameMode(GameMode.SURVIVAL);
+            player.getInventory().setItemStack(0, ItemStack.builder(Material.JUNGLE_PLANKS).amount(64).build());
         });
 
 
