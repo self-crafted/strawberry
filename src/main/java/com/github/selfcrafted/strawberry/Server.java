@@ -5,12 +5,11 @@ import com.github.selfcrafted.strawberry.commands.Commands;
 import com.github.selfcrafted.strawberry.config.ServerConfig;
 import com.github.selfcrafted.strawberry.config.ServerConfigImpl;
 import com.github.selfcrafted.strawberry.events.ServerEvents;
+import com.github.selfcrafted.strawberry.extra.serverlist.ListPing;
 import com.github.selfcrafted.strawberry.extra.startscript.StartScript;
 import com.github.selfcrafted.strawberry.instances.DimensionTypes;
 import com.github.selfcrafted.strawberry.instances.Instances;
 import com.github.selfcrafted.strawberry.receipe.Recipes;
-import com.github.selfcrafted.strawberry.extra.serverlist.ListPing;
-import net.kyori.adventure.text.Component;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.bungee.BungeeCordProxy;
@@ -74,10 +73,6 @@ public class Server {
         Commands.register();
         Recipes.register(MinecraftServer.getRecipeManager());
         ServerEvents.register(MinecraftServer.getGlobalEventHandler());
-        // Kick all players on shutdown
-        MinecraftServer.getSchedulerManager().buildShutdownTask(() ->
-                MinecraftServer.getConnectionManager().getOnlinePlayers().forEach(player ->
-                        player.kick(Component.translatable("multiplayer.disconnect.server_shutdown"))));
 
         // Actually start server
         MinecraftServer.LOGGER.info("Running in " + CONFIG.getMode() + " mode.");
