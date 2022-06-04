@@ -5,8 +5,12 @@ import net.minestom.server.recipe.RecipeManager;
 
 public class Recipes {
     public static final Recipe CRAFTING_TABLE = new CraftingTable();
+    public static final Recipe JUNGLE_BUTTON = new JungleButton();
 
     public static void register(RecipeManager manager) {
-        manager.addRecipe(CRAFTING_TABLE);
+        manager.addRecipes(
+                CRAFTING_TABLE,
+                JUNGLE_BUTTON
+        );
     }
 }
