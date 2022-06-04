@@ -5,11 +5,13 @@ import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
 import net.minestom.server.network.packet.server.play.DeclareRecipesPacket;
 import net.minestom.server.recipe.ShapedRecipe;
+import net.minestom.server.utils.NamespaceID;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class CraftingTable extends ShapedRecipe {
+    public static final NamespaceID RECIPE_ID = NamespaceID.from("strawberry:recipe_crafting_table");
     private static final DeclareRecipesPacket.Ingredient PLANKS =
             new DeclareRecipesPacket.Ingredient(List.of(
                     ItemStack.of(Material.OAK_PLANKS),
@@ -23,7 +25,7 @@ public class CraftingTable extends ShapedRecipe {
             ));
 
     CraftingTable() {
-        super(Material.CRAFTING_TABLE.namespace().asString(), 2, 2, "",
+        super(RECIPE_ID.asString(), 2, 2, "",
                 List.of(
                         PLANKS, PLANKS,
                         PLANKS, PLANKS
