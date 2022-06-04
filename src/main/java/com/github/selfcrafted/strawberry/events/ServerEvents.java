@@ -8,11 +8,20 @@ import net.minestom.server.adventure.audience.Audiences;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.event.GlobalEventHandler;
+import net.minestom.server.event.inventory.InventoryItemChangeEvent;
+import net.minestom.server.event.inventory.PlayerInventoryItemChangeEvent;
 import net.minestom.server.event.player.PlayerDisconnectEvent;
 import net.minestom.server.event.player.PlayerLoginEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
+import net.minestom.server.inventory.InventoryType;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
+import net.minestom.server.network.packet.server.play.DeclareRecipesPacket;
+import net.minestom.server.recipe.ShapelessRecipe;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 public class ServerEvents {
     public static void register(GlobalEventHandler eventHandler) {
@@ -44,6 +53,37 @@ public class ServerEvents {
             player.getInventory().setItemStack(0, ItemStack.builder(Material.JUNGLE_PLANKS).amount(64).build());
         });
 
+        eventHandler.addListener(InventoryItemChangeEvent.class, event -> {
+            var inventory = event.getInventory();
+            if (inventory == null) return;
+            if (inventory.getInventoryType() == InventoryType.CRAFTING) {
+                MinecraftServer.LOGGER.info("Crafting table slot {} {}", event.getSlot(), event.getNewItem());
+                // TODO: 04.06.22 implement 3x3 crafting
+                var itemStacks = Arrays.stream(inventory.getItemStacks())
+                        //.map(itemStack -> itemStack.withAmount(1))
+                        .collect(Collectors.toSet());
+                MinecraftServer.getRecipeManager().getRecipes().forEach(recipe -> {
+                    boolean isUsable = true;
+                    switch (recipe.getRecipeType()) {
+                        case SHAPED -> {}
+                        case SHAPELESS -> {
+                            var shapelessRecipe = ((ShapelessRecipe) recipe);
+                            var ingredients = shapelessRecipe.getIngredients();
+                            for (DeclareRecipesPacket.Ingredient ingredient : ingredients) {
+                                if (!new HashSet<>(ingredient.items()).containsAll(itemStacks)) {
+                                    isUsable = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    MinecraftServer.LOGGER.info("Recipe candidate {}: {}", recipe.getRecipeId(), isUsable);
+                });
+            }
+        });
 
+        eventHandler.addListener(PlayerInventoryItemChangeEvent.class, event -> {
+            // TODO: 04.06.22 implement 2x2 crafting
+        });
     }
 }
