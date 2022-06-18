@@ -1,4 +1,4 @@
-package com.github.selfcrafted.strawberry.events;
+package com.github.selfcrafted.strawberry.events.listeners;
 
 import com.github.selfcrafted.strawberry.dimensions.Dimensions;
 import net.kyori.adventure.text.Component;
@@ -14,7 +14,7 @@ import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
 
-public class ServerEvents {
+public class Listeners {
     public static void register(GlobalEventHandler eventHandler) {
         // Add server-wide events
         // TODO: 28.05.22 make join and leave messages configurable

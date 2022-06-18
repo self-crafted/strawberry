@@ -4,7 +4,7 @@ import com.github.selfcrafted.strawberry.biomes.Biomes;
 import com.github.selfcrafted.strawberry.commands.Commands;
 import com.github.selfcrafted.strawberry.config.ServerConfig;
 import com.github.selfcrafted.strawberry.config.ServerConfigImpl;
-import com.github.selfcrafted.strawberry.events.ServerEvents;
+import com.github.selfcrafted.strawberry.events.listeners.Listeners;
 import com.github.selfcrafted.strawberry.extra.serverlist.ListPing;
 import com.github.selfcrafted.strawberry.extra.startscript.StartScript;
 import com.github.selfcrafted.strawberry.dimensions.DimensionTypes;
@@ -72,7 +72,7 @@ public class Server {
         Dimensions.register(MinecraftServer.getInstanceManager());
         Commands.register(MinecraftServer.getCommandManager());
         Recipes.register(MinecraftServer.getRecipeManager());
-        ServerEvents.register(MinecraftServer.getGlobalEventHandler());
+        Listeners.register(MinecraftServer.getGlobalEventHandler());
 
         // Actually start server
         MinecraftServer.LOGGER.info("Running in " + CONFIG.getMode() + " mode.");
