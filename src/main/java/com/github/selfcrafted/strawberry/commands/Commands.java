@@ -9,6 +9,7 @@ public class Commands {
     public static final Command RESTART = new RestartCommand();
     public static final Command LIST = new ListCommand();
     public static final Command UPTIME = new UptimeCommand();
+    public static final Command GAMEMODE = new GameModeCommand();
 
 
     public static void register(@NotNull CommandManager commandManager) {
@@ -17,5 +18,6 @@ public class Commands {
         commandManager.register(RESTART);
         commandManager.register(LIST);
         commandManager.register(UPTIME);
+        commandManager.register(GAMEMODE);
     }
 }
