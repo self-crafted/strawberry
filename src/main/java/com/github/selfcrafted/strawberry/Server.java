@@ -7,8 +7,8 @@ import com.github.selfcrafted.strawberry.config.ServerConfigImpl;
 import com.github.selfcrafted.strawberry.events.ServerEvents;
 import com.github.selfcrafted.strawberry.extra.serverlist.ListPing;
 import com.github.selfcrafted.strawberry.extra.startscript.StartScript;
-import com.github.selfcrafted.strawberry.instances.DimensionTypes;
-import com.github.selfcrafted.strawberry.instances.Instances;
+import com.github.selfcrafted.strawberry.dimensions.DimensionTypes;
+import com.github.selfcrafted.strawberry.dimensions.Dimensions;
 import com.github.selfcrafted.strawberry.receipe.Recipes;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.extras.MojangAuth;
@@ -69,7 +69,7 @@ public class Server {
         // Register everything that needs to be registered
         Biomes.register(MinecraftServer.getBiomeManager());
         DimensionTypes.register(MinecraftServer.getDimensionTypeManager());
-        Instances.register(MinecraftServer.getInstanceManager());
+        Dimensions.register(MinecraftServer.getInstanceManager());
         Commands.register(MinecraftServer.getCommandManager());
         Recipes.register(MinecraftServer.getRecipeManager());
         ServerEvents.register(MinecraftServer.getGlobalEventHandler());

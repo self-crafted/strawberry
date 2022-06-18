@@ -1,4 +1,4 @@
-package com.github.selfcrafted.strawberry.instances;
+package com.github.selfcrafted.strawberry.dimensions;
 
 import net.minestom.server.instance.AnvilLoader;
 import net.minestom.server.instance.InstanceContainer;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 import java.util.UUID;
 
-public class Instances {
+public class Dimensions {
     public static final InstanceContainer OVERWORLD = new OverWorld(
             UUID.randomUUID(),
             new AnvilLoader(Path.of("instances", "overworld")));

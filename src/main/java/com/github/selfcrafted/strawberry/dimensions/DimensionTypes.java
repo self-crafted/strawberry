@@ -1,4 +1,4 @@
-package com.github.selfcrafted.strawberry.instances;
+package com.github.selfcrafted.strawberry.dimensions;
 
 import net.minestom.server.utils.NamespaceID;
 import net.minestom.server.world.DimensionType;

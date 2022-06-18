@@ -1,4 +1,4 @@
-package com.github.selfcrafted.strawberry.instances;
+package com.github.selfcrafted.strawberry.dimensions;
 
 import com.github.selfcrafted.strawberry.biomes.Biomes;
 import net.minestom.server.instance.IChunkLoader;

@@ -1,6 +1,6 @@
 package com.github.selfcrafted.strawberry.events;
 
-import com.github.selfcrafted.strawberry.instances.Instances;
+import com.github.selfcrafted.strawberry.dimensions.Dimensions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.MinecraftServer;
@@ -21,7 +21,7 @@ public class ServerEvents {
         eventHandler.addListener(PlayerLoginEvent.class, event -> {
             var player = event.getPlayer();
             // TODO: 27.05.22 get players login point from world data
-            event.setSpawningInstance(Instances.OVERWORLD);
+            event.setSpawningInstance(Dimensions.OVERWORLD);
             player.setRespawnPoint(new Pos(0, 100, 0));
         });
 
