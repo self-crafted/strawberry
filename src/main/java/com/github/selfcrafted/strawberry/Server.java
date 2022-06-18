@@ -67,10 +67,10 @@ public class Server {
         }
 
         // Register everything that needs to be registered
-        Biomes.register();
-        DimensionTypes.register();
-        Instances.register();
-        Commands.register();
+        Biomes.register(MinecraftServer.getBiomeManager());
+        DimensionTypes.register(MinecraftServer.getDimensionTypeManager());
+        Instances.register(MinecraftServer.getInstanceManager());
+        Commands.register(MinecraftServer.getCommandManager());
         Recipes.register(MinecraftServer.getRecipeManager());
         ServerEvents.register(MinecraftServer.getGlobalEventHandler());
 

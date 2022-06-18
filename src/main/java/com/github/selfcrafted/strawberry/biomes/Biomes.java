@@ -1,9 +1,9 @@
 package com.github.selfcrafted.strawberry.biomes;
 
-import net.minestom.server.MinecraftServer;
 import net.minestom.server.utils.NamespaceID;
 import net.minestom.server.world.biomes.Biome;
 import net.minestom.server.world.biomes.BiomeEffects;
+import net.minestom.server.world.biomes.BiomeManager;
 import net.minestom.server.world.biomes.BiomeParticle;
 
 public class Biomes {
@@ -25,9 +25,8 @@ public class Biomes {
             .build();
 
 
-    public static void register() {
+    public static void register(BiomeManager biomeManager) {
         // Register biomes
-        var biomeManager = MinecraftServer.getBiomeManager();
         biomeManager.addBiome(DESERT);
         biomeManager.addBiome(WASTELANDS);
     }

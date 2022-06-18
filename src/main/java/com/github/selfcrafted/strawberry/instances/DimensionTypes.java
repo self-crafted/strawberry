@@ -1,8 +1,8 @@
 package com.github.selfcrafted.strawberry.instances;
 
-import net.minestom.server.MinecraftServer;
 import net.minestom.server.utils.NamespaceID;
 import net.minestom.server.world.DimensionType;
+import net.minestom.server.world.DimensionTypeManager;
 
 public class DimensionTypes {
     public static final DimensionType OVERWORLD = DimensionType.builder(NamespaceID.from("strawberry:overworld"))
@@ -41,9 +41,8 @@ public class DimensionTypes {
             .build();
 
 
-    public static void register() {
+    public static void register(DimensionTypeManager dimensionTypeManager) {
         // Register dimension types
-        var dimensionTypeManager = MinecraftServer.getDimensionTypeManager();
         dimensionTypeManager.addDimension(OVERWORLD);
         dimensionTypeManager.addDimension(NETHER);
     }
